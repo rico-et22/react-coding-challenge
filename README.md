@@ -12,7 +12,6 @@ Your job is to create a SPA which stores file details in the browsers local stor
 
 ## Screens:
 * `Main Screen` 
-    ![Homepage](img/HomePage.png)
     * Displays an upload dialog
     * Once a file was dropped on the file upload dialog area it will dispaly the file name and a "Save File" and "Reset File" button
     * Only PDF, DOCX, DOC are allowed
@@ -21,6 +20,10 @@ Your job is to create a SPA which stores file details in the browsers local stor
     * List all previously saved files (if any) in a table
     * Clicking on the "X" icon in the file list will remove the item and remove it from the browser storage
     * The table contains filename, file size (in bytes, kilobytes, megabytes, gigabytes, terabytes) and the file format (extension without the dot)
+
+![Desktop HD](https://user-images.githubusercontent.com/5519740/102994797-35067480-4539-11eb-947f-eec8ef49a7d4.jpg)
+![Desktop HD 2](https://user-images.githubusercontent.com/5519740/102994795-346dde00-4539-11eb-8640-bf511582a70c.jpg)
+![Desktop HD 3](https://user-images.githubusercontent.com/5519740/102994792-320b8400-4539-11eb-851d-c285bd9f5b4e.jpg)
 
 ## Must-have:
 1. React, Redux
