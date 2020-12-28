@@ -1,10 +1,10 @@
-import { createStore, combineReducers } from 'redux'
-import fileUploadReducer from './reducers/fileUploadReducer'
-import fileHistoryReducer from './reducers/fileHistoryReducer'
+import { createStore, combineReducers } from "redux";
+import fileUploadReducer from "./reducers/fileUploadReducer";
+import fileHistoryReducer from "./reducers/fileHistoryReducer";
 
 const loadLocalState = () => {
   try {
-    const serializedState = localStorage.getItem('fileHistory');
+    const serializedState = localStorage.getItem("fileHistory");
     if (serializedState === null) {
       return undefined;
     }
@@ -16,20 +16,24 @@ const loadLocalState = () => {
 const saveLocalState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('fileHistory', serializedState);
+    localStorage.setItem("fileHistory", serializedState);
   } catch {
     // ignore write errors
   }
 };
-const persistedState = loadLocalState()
+const persistedState = loadLocalState();
 
 const rootReducer = combineReducers({
   fileUpload: fileUploadReducer,
-  fileHistory: fileHistoryReducer
-})
-const store = createStore(rootReducer, persistedState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  fileHistory: fileHistoryReducer,
+});
+const store = createStore(
+  rootReducer,
+  persistedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 store.subscribe(() => {
-  saveLocalState(store.getState().fileHistory)
-})
+  saveLocalState(store.getState().fileHistory);
+});
 
-export default store
+export default store;

@@ -1,11 +1,11 @@
-import ActionButton from './ActionButton'
-import ReusableTable from './ReusableTable'
-import { useDispatch, useSelector } from 'react-redux'
-import formatFileSize from '../helpers/formatFileSize'
+import ActionButton from "./ActionButton";
+import ReusableTable from "./ReusableTable";
+import { useDispatch, useSelector } from "react-redux";
+import formatFileSize from "../helpers/formatFileSize";
 
 const FileHistory = (props) => {
-  const historyState = useSelector(state => state.fileHistory)
-  const dispatch = useDispatch()
+  const historyState = useSelector((state) => state.fileHistory);
+  const dispatch = useDispatch();
   return (
     <div>
       <h2>File History</h2>
@@ -28,17 +28,24 @@ const FileHistory = (props) => {
                 <td>{new Date(historyItem.lastModified).toLocaleString()}</td>
                 <td>{historyItem.fileFormat}</td>
                 <td>
-                  <ActionButton onClick={() => dispatch({ type: 'fileHistory/removed', payload: historyItem })}>
+                  <ActionButton
+                    onClick={() =>
+                      dispatch({
+                        type: "fileHistory/removed",
+                        payload: historyItem,
+                      })
+                    }
+                  >
                     X
                   </ActionButton>
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </ReusableTable>
     </div>
-  )
-}
+  );
+};
 
-export default FileHistory
+export default FileHistory;
