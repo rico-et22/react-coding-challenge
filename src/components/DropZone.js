@@ -48,7 +48,6 @@ const DropZone = (props) => {
   const onDrop = (e) => {
     e.preventDefault()
     const payload = e.dataTransfer.files[0]
-    console.log(payload)
     if (payload) dispatch({ type: 'fileUpload/dropped', payload })
   }
   let infoTextContent
