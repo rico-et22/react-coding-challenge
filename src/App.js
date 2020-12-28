@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css'
 import styled from 'styled-components'
 import FileHistory from './components/FileHistory'
 import DropZone from './components/DropZone'

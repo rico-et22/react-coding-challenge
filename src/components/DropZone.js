@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import ActionButton from './ActionButton'
+import { useDispatch, useSelector } from 'react-redux'
 
 const WidthWrapper = styled.div`
   width: 25rem;
@@ -14,14 +15,19 @@ const WrapBox = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  padding: 1rem;
 `
 
 const Icon = styled.span`
   font-size: 3.5rem;
+  ${props => props.redColor && css`
+    color: red
+  `}
 `
 
 const InfoText = styled.p`
-  margin-top: 0
+  margin-top: 0;
+  word-break: break-all;
 `
 
 const ButtonWrapper = styled.div`
@@ -35,22 +41,55 @@ const ButtonWrapper = styled.div`
 `
 
 const DropZone = (props) => {
+  const dispatch = useDispatch()
+  const fileState = useSelector(state => state.fileUpload)
+  const fileName = fileState.fileName
+  const validFormat = fileState.validFormat
+  const onDrop = (e) => {
+    e.preventDefault()
+    const payload = e.dataTransfer.files[0]
+    console.log(payload)
+    if (payload) dispatch({ type: 'fileUpload/dropped', payload })
+  }
+  let infoTextContent
+  let iconContent
+  if (fileName) {
+    if (validFormat) {
+      infoTextContent = fileName
+      iconContent = '📄'
+    }
+    else {
+      infoTextContent = 'Invalid File'
+      iconContent = 'X'
+    }
+  }
+  else {
+    infoTextContent = 'Drop file here'
+    iconContent = '+'
+  }
+  const saveFile = () => {
+    dispatch({ type: 'fileHistory/added', payload: fileState })
+    dispatch({ type: 'fileUpload/reset' })
+  }
   return (
     <WidthWrapper>
-      <WrapBox>
-        <Icon>+</Icon>
-        <InfoText>Drop file here</InfoText>
+      <WrapBox onDrop={onDrop} onDragOver={(e) => e.preventDefault()}>
+        <Icon redColor={iconContent === "X"}>{iconContent}</Icon>
+        <InfoText>{infoTextContent}</InfoText>
       </WrapBox>
-      <ButtonWrapper>
-        <ActionButton onClick={() => console.log('test click')} hasBiggerSize>
-          Reset File
-        </ActionButton>
-        <ActionButton onClick={() => console.log('test click')} hasBiggerSize>
-          Save File
-        </ActionButton>
-      </ButtonWrapper>
+      {fileName && (
+        <ButtonWrapper>
+          <ActionButton
+            onClick={() => dispatch({ type: "fileUpload/reset" })}
+            hasBiggerSize
+          >
+            Reset File
+          </ActionButton>
+          {validFormat && <ActionButton hasBiggerSize onClick={saveFile}>Save File</ActionButton>}
+        </ButtonWrapper>
+      )}
     </WidthWrapper>
-  )
+  );
 }
 
 export default DropZone

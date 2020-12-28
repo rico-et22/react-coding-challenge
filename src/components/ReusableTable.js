@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const TableWrapper = styled.div`
-  width: 35rem;
+  width: 37rem;
   min-height: 15rem;
   background: #F6F6F6;
   border: 2px solid #bfbfbf;
@@ -18,9 +18,21 @@ th {
   text-align: left;
   padding: 0 .5rem;
 }
+
+th:nth-child(1) {
+  width: 7rem;
+}
+th:nth-child(2) {
+  width: 7rem;
+}
+th:nth-child(3) {
+  width: 10rem;
+}
+
 td {
   height: 3.5rem;
   padding: 0 .5rem;
+  word-break: break-all;
 }
 `
 
