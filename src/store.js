@@ -5,7 +5,7 @@ import fileHistoryReducer from "./reducers/fileHistoryReducer";
 const loadLocalState = () => {
   try {
     const serializedState = localStorage.getItem("fileHistory");
-    if (serializedState === null) {
+    if (!serializedState) {
       return undefined;
     }
     return JSON.parse(serializedState);
