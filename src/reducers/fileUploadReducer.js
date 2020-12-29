@@ -9,7 +9,7 @@ const fileUploadReducer = (state = initialState, action) => {
   switch (action.type) {
     case "fileUpload/dropped":
       const file = action.payload;
-      const fileFormat = file.name.split(".")[1];
+      const fileFormat = file.name.split(".").pop();
       const isFileFormatValid = !!(
         fileFormat === "doc" ||
         fileFormat === "docx" ||
